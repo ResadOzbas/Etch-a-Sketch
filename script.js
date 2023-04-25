@@ -1,14 +1,21 @@
+
+
 //ensures DOM loads before script runs
-document.addEventListener('DOMContentLoaded', function(){
+function createGrid(grids = 100){
+    
     const container = document.querySelector('.container');
+    const input = document.querySelector('.input')
    
-    //creates the 16x16 grid, first makes 16 rows, then 16 divs in those rows 
-    for (let i = 0; i<16; i++){
+    //creates the 16x16 grid, first makes 16 rows, then 16 divs in those rows
+    //height and width of divs need to be 100/x%, x being number of grids, max 100 
+    for (let i = 0; i<grids; i++){
         const divi = document.createElement('div')
         divi.classList.add('flex-container')
+        divi.style.height = (100/grids) + '%'
         container.appendChild(divi);
-        for (let y = 0; y<16; y++){
+        for (let y = 0; y<grids; y++){
             const divy = document.createElement('div');
+            divy.style.width = (100/grids) + '%'
             divi.appendChild(divy);
         } 
     }
@@ -20,11 +27,24 @@ document.addEventListener('DOMContentLoaded', function(){
             div.classList.add('hovered');
         })
     })
-    
+
+};
+
+function inputClicked(){
+    console.log('works');  
+    const userInput = prompt('how many grids would you like? (max 100)');
+    createGrid(userInput)
+};
+
+
+ /* 
+ document.addEventListener('DOMContentLoaded', function(){
+    createGrid()
+})
+
     gridDiv.forEach(function(div){
         div.addEventListener('mouseleave', function(){
             div.classList.remove('hovered');
         })
     })
-
-});
+*/   
